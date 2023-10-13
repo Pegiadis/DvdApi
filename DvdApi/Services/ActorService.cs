@@ -27,7 +27,7 @@ namespace DvdApi.Services
             return await _dbAccess.GetActorByIdAsync(id);
         }
 
-        public async Task<bool> AddActorAsync(Actor actor)
+        public async Task<Actor> AddActorAsync(Actor actor)
         {
             // You could add business logic here to handle, for example, what happens if the actor information is not complete.
             return await _dbAccess.AddActorAsync(actor);
