@@ -4,33 +4,79 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-[ApiController]
-[Route("api/[controller]")]
-public class ActorController : ControllerBase
+namespace DvdApi.Controllers
 {
-    private readonly ActorService _actorService;
-
-    public ActorController()
+    [ApiController]
+    [Route("api/[controller]")]
+    public class ActorController : ControllerBase
     {
-        _actorService = new ActorService();
-    }
+        private readonly ActorService _actorService;
 
-    // GET: api/actors
-    [HttpGet]
-    public async Task<ActionResult<List<Actor>>> GetActors()
-    {
-        return Ok(await _actorService.GetAllActorsAsync());
-    }
-
-    // GET api/actors/5
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Actor>> GetActor(int id)
-    {
-        var actor = await _actorService.GetActorByIdAsync(id);
-        if (actor == null)
+        public ActorController(ActorService actorService)
         {
-            return NotFound();
+            _actorService = actorService;
         }
-        return Ok(actor);
+
+        // GET: api/actors
+        [HttpGet]
+        public async Task<ActionResult<List<Actor>>> GetActors()
+        {
+            return Ok(await _actorService.GetAllActorsAsync());
+        }
+
+        // GET api/actors/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Actor>> GetActor(int id)
+        {
+            var actor = await _actorService.GetActorByIdAsync(id);
+            if (actor == null)
+            {
+                return NotFound();
+            }
+            return Ok(actor);
+        }
+
+        // POST api/actors
+        [HttpPost]
+        public async Task<ActionResult<Actor>> CreateActor([FromBody] Actor actor)
+        {
+            var createdActor = await _actorService.AddActorAsync(actor);
+            if (createdActor == null)
+            {
+                return BadRequest(); // or another more appropriate status code
+            }
+
+            return CreatedAtAction(nameof(GetActor), new { id = createdActor.ActorId }, createdActor);
+        }
+
+
+        // PUT api/actors/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateActor(int id, [FromBody] Actor actor)
+        {
+            if (id != actor.ActorId)
+            {
+                return BadRequest();
+            }
+
+            var result = await _actorService.UpdateActorAsync(actor);
+            if (!result)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
+
+        // DELETE api/actors/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteActor(int id)
+        {
+            var result = await _actorService.DeleteActorAsync(id);
+            if (!result)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
     }
 }
