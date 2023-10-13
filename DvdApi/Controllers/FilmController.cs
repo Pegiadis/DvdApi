@@ -1,6 +1,5 @@
-﻿// FilmController.cs
-using DvdApi.Models;
-using DvdApi.Services; // Ensure this using statement is here
+﻿using DvdApi.Models;
+using DvdApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,20 +10,73 @@ namespace DvdApi.Controllers
     [Route("api/[controller]")]
     public class FilmController : ControllerBase
     {
-        private readonly FilmService _filmService; // Change to FilmService
+        private readonly FilmService _filmService;
 
-        public FilmController(FilmService filmService) // Change to FilmService
+        public FilmController(FilmService filmService) // FilmService is injected here.
         {
             _filmService = filmService;
         }
 
+        // GET: api/films
         [HttpGet]
         public async Task<ActionResult<List<Film>>> GetAllFilms()
         {
-            return await _filmService.GetAllFilmsAsync(); // Change to use FilmService
+            var films = await _filmService.GetAllFilmsAsync();
+            return Ok(films);
         }
 
-        // Other action methods corresponding to CRUD operations
-        // ...
+        // GET api/films/{id}
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Film>> GetFilm(int id)
+        {
+            var film = await _filmService.GetFilmAsync(id);
+            if (film == null)
+            {
+                return NotFound();
+            }
+            return Ok(film);
+        }
+
+        // POST api/films
+        [HttpPost]
+        public async Task<ActionResult<Film>> CreateFilm([FromBody] Film film)
+        {
+            var createdFilm = await _filmService.CreateFilmAsync(film);
+            if (createdFilm == null)
+            {
+                return BadRequest(); // or another more appropriate status code
+            }
+
+            return CreatedAtAction(nameof(GetFilm), new { id = createdFilm.FilmId }, createdFilm);
+        }
+
+        // PUT api/films/{id}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateFilm(int id, [FromBody] Film film)
+        {
+            if (id != film.FilmId)
+            {
+                return BadRequest();
+            }
+
+            var result = await _filmService.UpdateFilmAsync(film);
+            if (!result)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
+
+        // DELETE api/films/{id}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteFilm(int id)
+        {
+            var result = await _filmService.DeleteFilmAsync(id);
+            if (!result)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
     }
 }
