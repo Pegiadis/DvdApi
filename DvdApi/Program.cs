@@ -16,6 +16,10 @@ namespace DvdApi
 
             builder.Services.AddControllers();
 
+            // Register CustomerService and CustomerOperations for DI
+            builder.Services.AddScoped<CustomerService>();
+            builder.Services.AddScoped<CustomerOperations>();   
+
 
             // Register FilmService and FilmOperations for DI
             builder.Services.AddScoped<FilmService>();

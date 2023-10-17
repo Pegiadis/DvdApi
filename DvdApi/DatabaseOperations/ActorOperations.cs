@@ -50,8 +50,11 @@ namespace DvdApi.DatabaseOperations
             using (var connection = new NpgsqlConnection(connectionString))
             {
                 await connection.OpenAsync();
+
                 string query = "SELECT * FROM public.actor WHERE actor_id = @id";
+
                 var command = new NpgsqlCommand(query, connection);
+
                 command.Parameters.AddWithValue("@id", id);
 
                 using (var reader = await command.ExecuteReaderAsync())
