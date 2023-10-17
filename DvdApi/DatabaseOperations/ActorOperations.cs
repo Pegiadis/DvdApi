@@ -1,8 +1,5 @@
 ﻿using DvdApi.Models;
 using Npgsql;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace DvdApi.DatabaseOperations
 {

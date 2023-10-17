@@ -1,7 +1,4 @@
 ﻿using DvdApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using DvdApi.DatabaseOperations;
 
 namespace DvdApi.Services

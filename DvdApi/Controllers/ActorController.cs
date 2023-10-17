@@ -1,8 +1,6 @@
 ﻿using DvdApi.Models;
 using DvdApi.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace DvdApi.Controllers
 {
