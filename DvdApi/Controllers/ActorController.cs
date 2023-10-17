@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DvdApi.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("dvd/[controller]")]
     public class ActorController : ControllerBase
     {
         private readonly ActorService _actorService;
@@ -24,7 +24,7 @@ namespace DvdApi.Controllers
             return Ok(await _actorService.GetAllActorsAsync());
         }
 
-        // GET api/actors/5
+        // GET api/actors/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<Actor>> GetActor(int id)
         {
@@ -50,7 +50,7 @@ namespace DvdApi.Controllers
         }
 
 
-        // PUT api/actors/5
+        // PUT api/actors/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateActor(int id, [FromBody] Actor actor)
         {
