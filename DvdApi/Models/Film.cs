@@ -6,7 +6,6 @@
         public string Title { get; set; }
         public string Description { get; set; }
         public int ReleaseYear { get; set; } // assuming "year" type can be represented as an integer
-        public short LanguageId { get; set; }
         public short RentalDuration { get; set; }
         public decimal RentalRate { get; set; }
         public short? Length { get; set; } // nullable: it appears this can be null in your table

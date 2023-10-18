@@ -71,8 +71,6 @@ namespace DvdApi.DatabaseOperations
             using (var connection = new NpgsqlConnection(connectionString))
             {
                 await connection.OpenAsync();
-                //string query = "INSERT INTO public.film (/* fields except film_id */) VALUES (/* @parameters */) RETURNING film_id";
-                //var command = new NpgsqlCommand(query, connection);
 
                 string query = "INSERT INTO public.film (title, description) VALUES (@title, @description)";
                 using (var command = new NpgsqlCommand(query, connection))
@@ -83,10 +81,6 @@ namespace DvdApi.DatabaseOperations
                     // Execute the command
                     await command.ExecuteNonQueryAsync();
                 }
-
-
-                // Execute the query and get the ID of the newly inserted row
-                //film.FilmId = (int)await command.ExecuteScalarAsync();
             }
             return film; // Return the film with the newly assigned ID
         }

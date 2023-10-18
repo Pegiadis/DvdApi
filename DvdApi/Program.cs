@@ -6,7 +6,7 @@ using Microsoft.OpenApi.Models;
 
 namespace DvdApi
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
@@ -15,6 +15,10 @@ namespace DvdApi
             // Add services to the container.
 
             builder.Services.AddControllers();
+
+            // Register InventoryService and InventoryOperations for DI
+            builder.Services.AddScoped<InventoryService>();
+            builder.Services.AddScoped<InventoryOperations>();
 
             // Register StaffService and StaffOperations for DI
             builder.Services.AddScoped<StaffService>();
@@ -47,7 +51,7 @@ namespace DvdApi
                     TermsOfService = new Uri("https://example.com/terms"),
                     Contact = new OpenApiContact
                     {
-                        Name = "John Doe",
+                        Name = "Pegiadis",
                         Email = string.Empty,
                         Url = new Uri("https://twitter.com/johndoe"),
                     },
