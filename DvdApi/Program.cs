@@ -65,15 +65,15 @@ namespace DvdApi
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            // Configure the app to listen on the port provided by the environment variable
+            var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+            app.Urls.Add($"http://0.0.0.0:{port}");
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
             {
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                });
-            }
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseHttpsRedirection();
 
