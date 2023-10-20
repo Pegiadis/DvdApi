@@ -26,5 +26,19 @@ namespace DvdApi.Controllers
         }
 
 
+        //// Get: api/customers
+        //[HttpGet]
+        //public async Task<ActionResult<Customer>> GetCustomer(int id)
+        //{
+        //    var customer = await _customerService.GetCustomerAsync(id);
+        //    return Ok(customer);
+        //}
+
+
+
+
     }
 }
+
+         
+
