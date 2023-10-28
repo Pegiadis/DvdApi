@@ -8,12 +8,13 @@ namespace DvdApi.Controllers
     [Route("dvd/[controller]")]
     public class ActorController : ControllerBase
     {
-        private readonly ActorService _actorService;
+        private readonly IActorService _actorService;  // Change ActorService to IActorService
 
-        public ActorController(ActorService actorService)
+        public ActorController(IActorService actorService)
         {
             _actorService = actorService;
         }
+
 
         // GET: api/actors
         [HttpGet]
