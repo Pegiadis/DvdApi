@@ -35,7 +35,8 @@ namespace DvdApi
             builder.Services.AddScoped<FilmOperations>();
 
             // Register ActorService and ActorOperations for DI
-            builder.Services.AddScoped<ActorService>();
+            builder.Services.AddScoped<IActorService, ActorService>();
+
             builder.Services.AddScoped<ActorOperations>();
 
 
