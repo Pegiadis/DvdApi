@@ -1,4 +1,4 @@
-name: CI/CD
+name: Continuous-Deploymnet
 
 on:
   push:
@@ -24,12 +24,15 @@ jobs:
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         service_account_key: ${{ secrets.GCP_SA_KEY }}
         export_default_credentials: true
+    
+    - name: Authenticate Docker to GCR
+      run: gcloud auth configure-docker
 
     - name: Build and push Docker image
       run: |
-        docker build -t gcr.io/$GCP_PROJECT_ID/dvdapi:v3 .
-        docker push gcr.io/$GCP_PROJECT_ID/dvdapi:v3
+        docker build -t gcr.io/$GCP_PROJECT_ID/dvdapi:${GITHUB_SHA} .
+        docker push gcr.io/$GCP_PROJECT_ID/dvdapi:${GITHUB_SHA}
 
     - name: Deploy to Google Cloud Run
       run: |
-        gcloud run deploy dvdrestapiv3 --image gcr.io/$GCP_PROJECT_ID/dvdapi:v2 --platform managed --region europe-west1
+        gcloud run deploy dvdrestapi${GITHUB_SHA} --image gcr.io/$GCP_PROJECT_ID/dvdapi:${GITHUB_SHA} --platform managed --region europe-west1
