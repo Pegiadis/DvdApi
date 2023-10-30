@@ -1,7 +1,7 @@
 # DvdRental API
 
-![CI status](https://github.com/Pegiadis/DvdApi/actions/workflows/build-and-test.yml/badge.svg)
-[![CD status](https://github.com/Pegiadis/DvdApi/actions/workflows/continuous-deployment.yml/badge.svg)
+![CI-Pipeline status](https://github.com/Pegiadis/DvdApi/actions/workflows/build-and-test.yml/badge.svg)
+![CD-Pipeline status](https://github.com/Pegiadis/DvdApi/actions/workflows/continuous-deployment.yml/badge.svg)
 
 
 
