@@ -1,7 +1,7 @@
 # DvdRental API
 
 ![CI status](https://github.com/Pegiadis/DvdApi/actions/workflows/build-and-test.yml/badge.svg)
-[![Maintainability](https://api.codeclimate.com/v1/badges/REPLACE_WITH_YOUR_BADGE_ID/maintainability)](https://codeclimate.com/github/Pegiadis/DvdApi/maintainability)
+[![CD status](https://github.com/Pegiadis/DvdApi/actions/workflows/continuous-deployment.yml/badge.svg)
 
 
 
