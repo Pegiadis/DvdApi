@@ -33,11 +33,11 @@ jobs:
         GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
         GITHUB_SHA: ${{ github.sha }}
       run: |
-        docker build -t gcr.io/$GCP_PROJECT_ID/dvdapi:$GITHUB_SHA .
-        docker push gcr.io/$GCP_PROJECT_ID/dvdapi:$GITHUB_SHA
+        docker build -t gcr.io/$GCP_PROJECT_ID/dvdapi:v3 .
+        docker push gcr.io/$GCP_PROJECT_ID/dvdapi:v3
 
     - name: Deploy to Google Cloud Run
       run: |
-        gcloud run deploy dvdrestapi${GITHUB_SHA} --image gcr.io/$GCP_PROJECT_ID/dvdapi:${GITHUB_SHA} --platform managed --region europe-west1
+        gcloud run deploy dvdrestapiv3 --image gcr.io/$GCP_PROJECT_ID/dvdapi:v3 --platform managed --region europe-west1
 
 
