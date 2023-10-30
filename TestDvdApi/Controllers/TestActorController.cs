@@ -68,5 +68,19 @@ public class ActorControllerTests
         Assert.IsType<NotFoundResult>(result.Result);
     }
 
-    // You can add more tests for the other methods following the patterns above.
+    [Fact]
+    public async Task PostActor_ReturnsCreatedAtAction()
+    {
+        // Arrange
+        var actor = new Actor { ActorId = 1, /* other properties */ };
+        _mockActorService.Setup(s => s.AddActorAsync(actor)).ReturnsAsync(actor);
+
+        // Act
+        var result = await _controller.CreateActor(actor);
+
+        // Assert
+        var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
+        var returnValue = Assert.IsType<Actor>(createdAtActionResult.Value);
+        Assert.Equal(1, returnValue.ActorId);
+    }
 }
