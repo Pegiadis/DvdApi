@@ -12,7 +12,7 @@ namespace DvdApi.Services
 
         public FilmService()
         {
-            _filmOperations = new FilmOperations(); // Consider dependency injection for this dependency.
+            _filmOperations = new FilmOperations(); 
         }
 
         public async Task<List<Film>> GetAllFilmsAsync()
@@ -23,9 +23,8 @@ namespace DvdApi.Services
             }
             catch (Exception ex)
             {
-                // Log the exception
-                // Consider how you want to handle exceptions - rethrow, return null, return a default value, etc.
-                throw; // or handle differently according to your requirements
+                // Log the exception.
+                throw;
             }
         }
 
@@ -33,8 +32,7 @@ namespace DvdApi.Services
         {
             if (id <= 0)
             {
-                // Log and handle the error appropriately
-                // You might want to throw an exception or return null
+                
                 throw new ArgumentException("Invalid ID", nameof(id));
             }
 
@@ -44,8 +42,8 @@ namespace DvdApi.Services
             }
             catch (Exception ex)
             {
-                // Log and handle the exception
-                throw; // or handle differently
+                
+                throw;
             }
         }
 
@@ -56,7 +54,7 @@ namespace DvdApi.Services
                 throw new ArgumentNullException(nameof(film));
             }
 
-            // You might want to add further validation here
+            
 
             try
             {
@@ -64,8 +62,8 @@ namespace DvdApi.Services
             }
             catch (Exception ex)
             {
-                // Log and handle the exception
-                throw; // or handle differently
+                
+                throw; 
             }
         }
 
@@ -76,7 +74,7 @@ namespace DvdApi.Services
                 throw new ArgumentNullException(nameof(film));
             }
 
-            // Further validation
+            
 
             try
             {
@@ -84,8 +82,8 @@ namespace DvdApi.Services
             }
             catch (Exception ex)
             {
-                // Log and handle the exception
-                throw; // or handle differently
+                
+                throw; 
             }
         }
 
@@ -102,8 +100,8 @@ namespace DvdApi.Services
             }
             catch (Exception ex)
             {
-                // Log and handle the exception
-                throw; // or handle differently
+                
+                throw; 
             }
         }
     }

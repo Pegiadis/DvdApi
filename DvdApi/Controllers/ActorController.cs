@@ -8,7 +8,7 @@ namespace DvdApi.Controllers
     [Route("dvd/[controller]")]
     public class ActorController : ControllerBase
     {
-        private readonly IActorService _actorService;  // Change ActorService to IActorService
+        private readonly IActorService _actorService; 
 
         public ActorController(IActorService actorService)
         {
@@ -42,7 +42,7 @@ namespace DvdApi.Controllers
             var createdActor = await _actorService.AddActorAsync(actor);
             if (createdActor == null)
             {
-                return BadRequest(); // or another more appropriate status code
+                return BadRequest();
             }
 
             return CreatedAtAction(nameof(GetActor), new { id = createdActor.ActorId }, createdActor);

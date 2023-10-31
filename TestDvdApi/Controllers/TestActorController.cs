@@ -24,8 +24,8 @@ public class ActorControllerTests
         // Arrange
         var actors = new List<Actor>
         {
-            new Actor { ActorId = 1, /* other properties */ },
-            new Actor { ActorId = 2, /* other properties */ }
+            new Actor { ActorId = 1, },
+            new Actor { ActorId = 2, }
         };
 
         _mockActorService.Setup(s => s.GetAllActorsAsync()).ReturnsAsync(actors);
@@ -43,7 +43,7 @@ public class ActorControllerTests
     public async Task GetActor_ReturnsActor_WhenActorExists()
     {
         // Arrange
-        var actor = new Actor { ActorId = 1, /* other properties */ };
+        var actor = new Actor { ActorId = 1, };
         _mockActorService.Setup(s => s.GetActorByIdAsync(1)).ReturnsAsync(actor);
 
         // Act
@@ -72,7 +72,7 @@ public class ActorControllerTests
     public async Task PostActor_ReturnsCreatedAtAction()
     {
         // Arrange
-        var actor = new Actor { ActorId = 1, /* other properties */ };
+        var actor = new Actor { ActorId = 1, };
         _mockActorService.Setup(s => s.AddActorAsync(actor)).ReturnsAsync(actor);
 
         // Act

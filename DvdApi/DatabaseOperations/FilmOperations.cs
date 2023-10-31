@@ -30,8 +30,6 @@ namespace DvdApi.DatabaseOperations
                         films.Add(new Film
                         {
                             FilmId = reader.GetInt32(reader.GetOrdinal("film_id")),
-                            // Other properties
-                            // ...
                             LastUpdate = reader.GetDateTime(reader.GetOrdinal("last_update"))
                         });
                     }
@@ -57,7 +55,6 @@ namespace DvdApi.DatabaseOperations
                         return new Film
                         {
                             FilmId = reader.GetInt32(reader.GetOrdinal("film_id")),
-                            // ... other fields
                             LastUpdate = reader.GetDateTime(reader.GetOrdinal("last_update"))
                         };
                     }
@@ -94,8 +91,6 @@ namespace DvdApi.DatabaseOperations
                 var command = new NpgsqlCommand(query, connection);
                 command.Parameters.AddWithValue("@id", film.FilmId);
 
-                // Add command.Parameters.AddWithValue() for each field to be updated
-                // ...
 
                 var affectedRows = await command.ExecuteNonQueryAsync();
                 return affectedRows > 0; // Return true if the update was successful
