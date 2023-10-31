@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DvdApi.Controllers
 {
     [ApiController]
-    [Route("dvd/[controller]")]
+    [Route("api/[controller]")]
     public class FilmController : ControllerBase
     {
         private readonly FilmService _filmService;

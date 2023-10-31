@@ -8,7 +8,7 @@ namespace DvdApi.Controllers
 {
 
     [ApiController]
-    [Route("dvd/[controller]")]
+    [Route("api/[controller]")]
     public class CustomerController: ControllerBase
     {
         private readonly CustomerService _customerService;
