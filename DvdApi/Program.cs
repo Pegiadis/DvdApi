@@ -57,18 +57,6 @@ namespace DvdApi
                     Version = "v1",
                     Title = "My API",
                     Description = "A simple example ASP.NET Core Web API",
-                    TermsOfService = new Uri("https://example.com/terms"),
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Pegiadis",
-                        Email = string.Empty,
-                        Url = new Uri("https://twitter.com/johndoe"),
-                    },
-                    License = new OpenApiLicense
-                    {
-                        Name = "Use under LICX",
-                        Url = new Uri("https://example.com/license"),
-                    }
                 });
             });
         }
