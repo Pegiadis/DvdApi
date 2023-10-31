@@ -1,21 +1,20 @@
 ﻿using DvdApi.Models;
 using DvdApi.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace DvdApi.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("dvd/[controller]")]
     public class ActorController : ControllerBase
     {
-        private readonly ActorService _actorService;
+        private readonly IActorService _actorService; 
 
-        public ActorController(ActorService actorService)
+        public ActorController(IActorService actorService)
         {
             _actorService = actorService;
         }
+
 
         // GET: api/actors
         [HttpGet]
@@ -24,7 +23,7 @@ namespace DvdApi.Controllers
             return Ok(await _actorService.GetAllActorsAsync());
         }
 
-        // GET api/actors/5
+        // GET api/actors/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<Actor>> GetActor(int id)
         {
@@ -43,14 +42,14 @@ namespace DvdApi.Controllers
             var createdActor = await _actorService.AddActorAsync(actor);
             if (createdActor == null)
             {
-                return BadRequest(); // or another more appropriate status code
+                return BadRequest();
             }
 
             return CreatedAtAction(nameof(GetActor), new { id = createdActor.ActorId }, createdActor);
         }
 
 
-        // PUT api/actors/5
+        // PUT api/actors/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateActor(int id, [FromBody] Actor actor)
         {
@@ -78,5 +77,6 @@ namespace DvdApi.Controllers
             }
             return NoContent();
         }
+
     }
 }

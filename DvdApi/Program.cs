@@ -1,34 +1,56 @@
-
 using DvdApi.DatabaseOperations;
 using DvdApi.Services;
 using Microsoft.OpenApi.Models;
 
-
 namespace DvdApi
 {
-    public class Program
+    public static class Program
     {
+        // Main method
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            RegisterServices(builder.Services);
+            ConfigureSwagger(builder.Services);
 
-            builder.Services.AddControllers();
+            var app = builder.Build();
 
+            ConfigureApp(app);
 
-            // Register FilmService and FilmOperations for DI
-            builder.Services.AddScoped<FilmService>();
-            builder.Services.AddScoped<FilmOperations>();
+            app.Run();
+        }
 
-            // Register ActorService and ActorOperations for DI
-            builder.Services.AddScoped<ActorService>();
-            builder.Services.AddScoped<ActorOperations>();
+        private static void RegisterServices(IServiceCollection services)
+        {
+            // Register Controllers
+            services.AddControllers();
 
+            // Inventory
+            services.AddScoped<InventoryService>();
+            services.AddScoped<InventoryOperations>();
 
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(c =>
+            // Staff
+            services.AddScoped<StaffService>();
+            services.AddScoped<StaffOperations>();
+
+            // Customer
+            services.AddScoped<CustomerService>();
+            services.AddScoped<CustomerOperations>();
+
+            // Film
+            services.AddScoped<FilmService>();
+            services.AddScoped<FilmOperations>();
+
+            // Actor
+            services.AddScoped<IActorService, ActorService>();
+            services.AddScoped<ActorOperations>();
+        }
+
+        private static void ConfigureSwagger(IServiceCollection services)
+        {
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
@@ -38,7 +60,7 @@ namespace DvdApi
                     TermsOfService = new Uri("https://example.com/terms"),
                     Contact = new OpenApiContact
                     {
-                        Name = "John Doe",
+                        Name = "Pegiadis",
                         Email = string.Empty,
                         Url = new Uri("https://twitter.com/johndoe"),
                     },
@@ -49,28 +71,23 @@ namespace DvdApi
                     }
                 });
             });
+        }
 
-            var app = builder.Build();
+        private static void ConfigureApp(WebApplication app)
+        {
+            // Configure the app to listen on the port provided by the environment variable
+            var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+            app.Urls.Add($"http://0.0.0.0:{port}");
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
             {
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                });
-            }
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
-
-            app.Run();
         }
     }
 }
-

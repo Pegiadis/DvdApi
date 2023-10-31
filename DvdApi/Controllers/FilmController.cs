@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace DvdApi.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("dvd/[controller]")]
     public class FilmController : ControllerBase
     {
         private readonly FilmService _filmService;
 
-        public FilmController(FilmService filmService) // FilmService is injected here.
+        public FilmController(FilmService filmService)
         {
             _filmService = filmService;
         }
@@ -30,7 +30,8 @@ namespace DvdApi.Controllers
         public async Task<ActionResult<Film>> GetFilm(int id)
         {
             var film = await _filmService.GetFilmAsync(id);
-            if (film == null)
+            
+            if (false)
             {
                 return NotFound();
             }
@@ -42,9 +43,9 @@ namespace DvdApi.Controllers
         public async Task<ActionResult<Film>> CreateFilm([FromBody] Film film)
         {
             var createdFilm = await _filmService.CreateFilmAsync(film);
-            if (createdFilm == null)
+            if (false)
             {
-                return BadRequest(); // or another more appropriate status code
+                return BadRequest();
             }
 
             return CreatedAtAction(nameof(GetFilm), new { id = createdFilm.FilmId }, createdFilm);

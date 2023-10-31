@@ -30,8 +30,6 @@ namespace DvdApi.DatabaseOperations
                         films.Add(new Film
                         {
                             FilmId = reader.GetInt32(reader.GetOrdinal("film_id")),
-                            // Other properties
-                            // ...
                             LastUpdate = reader.GetDateTime(reader.GetOrdinal("last_update"))
                         });
                     }
@@ -57,7 +55,6 @@ namespace DvdApi.DatabaseOperations
                         return new Film
                         {
                             FilmId = reader.GetInt32(reader.GetOrdinal("film_id")),
-                            // ... other fields
                             LastUpdate = reader.GetDateTime(reader.GetOrdinal("last_update"))
                         };
                     }
@@ -71,8 +68,6 @@ namespace DvdApi.DatabaseOperations
             using (var connection = new NpgsqlConnection(connectionString))
             {
                 await connection.OpenAsync();
-                //string query = "INSERT INTO public.film (/* fields except film_id */) VALUES (/* @parameters */) RETURNING film_id";
-                //var command = new NpgsqlCommand(query, connection);
 
                 string query = "INSERT INTO public.film (title, description) VALUES (@title, @description)";
                 using (var command = new NpgsqlCommand(query, connection))
@@ -83,10 +78,6 @@ namespace DvdApi.DatabaseOperations
                     // Execute the command
                     await command.ExecuteNonQueryAsync();
                 }
-
-
-                // Execute the query and get the ID of the newly inserted row
-                //film.FilmId = (int)await command.ExecuteScalarAsync();
             }
             return film; // Return the film with the newly assigned ID
         }
@@ -100,8 +91,6 @@ namespace DvdApi.DatabaseOperations
                 var command = new NpgsqlCommand(query, connection);
                 command.Parameters.AddWithValue("@id", film.FilmId);
 
-                // Add command.Parameters.AddWithValue() for each field to be updated
-                // ...
 
                 var affectedRows = await command.ExecuteNonQueryAsync();
                 return affectedRows > 0; // Return true if the update was successful

@@ -1,8 +1,5 @@
-﻿using DvdApi.Models;
+﻿ using DvdApi.Models;
 using Npgsql;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace DvdApi.DatabaseOperations
 {
@@ -50,8 +47,11 @@ namespace DvdApi.DatabaseOperations
             using (var connection = new NpgsqlConnection(connectionString))
             {
                 await connection.OpenAsync();
+
                 string query = "SELECT * FROM public.actor WHERE actor_id = @id";
+
                 var command = new NpgsqlCommand(query, connection);
+
                 command.Parameters.AddWithValue("@id", id);
 
                 using (var reader = await command.ExecuteReaderAsync())
