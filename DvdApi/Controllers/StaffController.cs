@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DvdApi.Controllers
 {
     [ApiController]
-    [Route("dvd/[controller]")]
+    [Route("api/[controller]")]
     public class StaffController : ControllerBase
     {
         private readonly StaffService _staffService;

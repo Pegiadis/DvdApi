@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DvdApi.Controllers
 {
     [ApiController]
-    [Route("dvd/[controller]")]
+    [Route("api/[controller]")]
     public class ActorController : ControllerBase
     {
         private readonly IActorService _actorService;  // Change ActorService to IActorService
