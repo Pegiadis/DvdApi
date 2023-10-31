@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace DvdApi.Services
 {
+
     public class ActorService : IActorService
     {
         private readonly ActorOperations _dbAccess;
@@ -39,6 +40,5 @@ namespace DvdApi.Services
             return await _dbAccess.DeleteActorAsync(id);
         }
 
-        // Additional methods related to business operations can be added here.
     }
 }

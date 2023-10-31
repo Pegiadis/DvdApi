@@ -12,7 +12,7 @@ namespace DvdApi.Controllers
     {
         private readonly FilmService _filmService;
 
-        public FilmController(FilmService filmService) // FilmService is injected here.
+        public FilmController(FilmService filmService)
         {
             _filmService = filmService;
         }
