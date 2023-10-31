@@ -6,6 +6,7 @@ namespace DvdApi
 {
     public static class Program
     {
+        // Main method
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
