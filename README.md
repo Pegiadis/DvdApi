@@ -31,7 +31,7 @@ and the api in a docker on GCP in the cloud run service. The api is deployed aut
 
 
 ## Endpoints
-
+https://dvdrestapiv2-tjp3smyhka-ew.a.run.app/swagger/index.html
 ### Actor API Endpoints
 
 Below is a list of available endpoints for the `Actor` resource:
