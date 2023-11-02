@@ -4,7 +4,17 @@ using DvdApi.Models;
 
 namespace DvdApi.Services
 {
-    public class CustomerService
+    public interface ICustomerService
+    {
+        Task<List<Customer>> GetAllCustomersAsync();
+        Task<Customer> GetCustomerAsync(int id);
+        Task<Customer> AddCustomerAsync(Customer customer);
+        Task UpdateCustomerAsync(int id, Customer customer);
+        Task DeleteCustomerAsync(int id);
+    }
+
+
+    public class CustomerService : ICustomerService
     {
         private readonly CustomerOperations _dbAccess;
         public CustomerService()
@@ -22,9 +32,9 @@ namespace DvdApi.Services
             return await _dbAccess.GetCustomerAsync(id);
         }
 
-        public async Task AddCustomerAsync(Customer customer)
+        public async Task<Customer> AddCustomerAsync(Customer customer)
         {
-            await _dbAccess.AddCustomerAsync(customer);
+            return await _dbAccess.AddCustomerAsync(customer);
         }
 
         public async Task UpdateCustomerAsync(int id, Customer customer)

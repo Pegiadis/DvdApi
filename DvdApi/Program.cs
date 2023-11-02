@@ -35,7 +35,7 @@ namespace DvdApi
             services.AddScoped<StaffOperations>();
 
             // Customer
-            services.AddScoped<CustomerService>();
+            services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<CustomerOperations>();
 
             // Film
