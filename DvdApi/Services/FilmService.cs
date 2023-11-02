@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace DvdApi.Services
 {
-    public class FilmService
+
+    public interface IFilmService
+    {
+        Task<List<Film>> GetAllFilmsAsync();
+        Task<Film> GetFilmAsync(int id);
+        Task<Film> CreateFilmAsync(Film film);
+        Task<bool> UpdateFilmAsync(Film film);
+        Task<bool> DeleteFilmAsync(int id);
+    }
+
+
+    public class FilmService : IFilmService
     {
         private readonly FilmOperations _filmOperations;
 

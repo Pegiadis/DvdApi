@@ -39,7 +39,7 @@ namespace DvdApi
             services.AddScoped<CustomerOperations>();
 
             // Film
-            services.AddScoped<FilmService>();
+            services.AddScoped<IFilmService, FilmService>();
             services.AddScoped<FilmOperations>();
 
             // Actor
