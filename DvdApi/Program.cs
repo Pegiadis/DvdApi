@@ -27,7 +27,7 @@ namespace DvdApi
             services.AddControllers();
 
             // Inventory
-            services.AddScoped<InventoryService>();
+            services.AddScoped<IInventoryService, InventoryService>();
             services.AddScoped<InventoryOperations>();
 
             // Staff
