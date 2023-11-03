@@ -31,7 +31,7 @@ namespace DvdApi
             services.AddScoped<InventoryOperations>();
 
             // Staff
-            services.AddScoped<StaffService>();
+            services.AddScoped<IStaffService,StaffService>();
             services.AddScoped<StaffOperations>();
 
             // Customer

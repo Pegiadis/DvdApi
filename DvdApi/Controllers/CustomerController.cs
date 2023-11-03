@@ -61,7 +61,7 @@ namespace DvdApi.Controllers
             var existingCustomer = await _customerService.GetCustomerAsync(id);
             if (existingCustomer == null)
             {
-                return NotFound();
+                return NotFound(); 
             }
 
             await _customerService.UpdateCustomerAsync(id, customer);
