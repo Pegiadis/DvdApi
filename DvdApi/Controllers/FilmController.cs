@@ -10,9 +10,9 @@ namespace DvdApi.Controllers
     [Route("api/[controller]")]
     public class FilmController : ControllerBase
     {
-        private readonly FilmService _filmService;
+        private readonly IFilmService _filmService;
 
-        public FilmController(FilmService filmService)
+        public FilmController(IFilmService filmService)
         {
             _filmService = filmService;
         }

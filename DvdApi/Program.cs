@@ -27,19 +27,19 @@ namespace DvdApi
             services.AddControllers();
 
             // Inventory
-            services.AddScoped<InventoryService>();
+            services.AddScoped<IInventoryService, InventoryService>();
             services.AddScoped<InventoryOperations>();
 
             // Staff
-            services.AddScoped<StaffService>();
+            services.AddScoped<IStaffService,StaffService>();
             services.AddScoped<StaffOperations>();
 
             // Customer
-            services.AddScoped<CustomerService>();
+            services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<CustomerOperations>();
 
             // Film
-            services.AddScoped<FilmService>();
+            services.AddScoped<IFilmService, FilmService>();
             services.AddScoped<FilmOperations>();
 
             // Actor
